@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory 1</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('bg1.PNG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+        .button-group {
+            position: absolute;
+            right: 550px;
+            top: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 10;
+        }
+        .button-group.right {
+            right: 10000px;
+            left: auto;
+            transform: none;
+            top: 250px;
+        }
+        #openLetterBtn, #showLetterBtn,
+        #openLetterBtn2, #showLetterBtn2 {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #fff;
+            background: linear-gradient(135deg, #47a5e3 30%, #ffffff 100%);
+            border: 2px solid #b3e5fc;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(33,150,243,0.15);
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+            outline: none;
+            margin: 0;
+        }
+        #openLetterBtn:hover, #showLetterBtn:hover,
+        #openLetterBtn2:hover, #showLetterBtn2:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 8px 24px rgba(33,150,243,0.22);
+            background: linear-gradient(135deg, #2196f3 0%, #6ec6ff 100%);
+        }
+        #openLetterBtn, #showLetterBtn {
+            left: 30px;
+        }
+        #openLetterBtn { top: 30px; }
+        #showLetterBtn { top: 80px; }
+        #openLetterBtn2, #showLetterBtn2 {
+            right: 30px;
+        }
+        #openLetterBtn2 { top: 30px; }
+        #showLetterBtn2 { top: 80px; }
+        #letterModal, #showLetterModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.4);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        #showLetterModal { z-index: 1001; }
+        .letter-box {
+            background: #fffbe6;
+            border: 2px solid #41add2;
+            border-radius: 12px;
+            width: 400px;
+            max-width: 90vw;
+            margin: auto;
+            padding: 30px 20px 20px 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            position: relative;
+            font-family: 'Georgia', serif;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        .letter-title {
+            text-align: center;
+            margin-top: 0;
+            font-family: 'Brush Script MT', cursive, sans-serif;
+        }
+        #letterText {
+            width: 100%;
+            height: 180px;
+            border: none;
+            background: transparent;
+            font-size: 18px;
+            resize: none;
+            outline: none;
+            font-family: 'Georgia',serif;
+            padding: 10px;
+        }
+        #submitLetterBtn {
+            margin-top: 15px;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #489adc;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #letterContent {
+            white-space: pre-wrap;
+            min-height: 400px;
+            font-size: 18px;
+            font-family: 'Georgia',serif;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        @media (max-width: 600px) {
+            .button-group,
+            .button-group.right {
+                position: static !important;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+                margin: 20px 0;
+                top: auto !important;
+                right : 300px ;
+                left: 300px !important;
+                transform: none !important;
+                display: flex !important;
+            }
+            #openLetterBtn, #showLetterBtn,
+            #openLetterBtn2, #showLetterBtn2 {
+                font-size: 1em;
+                padding: 8px 10px;
+                border-radius: 8px;
+                width: 100px;
+            }
+            .letter-box {
+                width: 95vw;
+                padding: 15px 5px 10px 5px;
+            }
+            #letterText, #letterContent {
+                font-size: 1em;
+                min-height: 100px;
+                max-height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="button-group">
+        <button id="openLetterBtn">Dammu🥰</button>
+        <button id="showLetterBtn2">Show</button>
+    </div>
+    <div class="button-group right">
+        <button id="openLetterBtn2">simmu🥰</button>
+        <button id="showLetterBtn">Show</button>
+    </div>
+        <div class="letter-box">
+            <button id="closeLetterBtn" class="close-btn">&times;</button>
+            <h2 class="letter-title">Letter</h2>
+            <textarea id="letterText" placeholder="Write your letter here..."></textarea>
+            <button id="submitLetterBtn">Submit</button>
+        </div>
+    </div>
+    <!-- Read-only modal for showing the letter -->
+    <div id="showLetterModal">
+        <div class="letter-box">
+            <button id="closeShowLetterBtn" class="close-btn">&times;</button>
+            <h2 class="letter-title">Your Letter</h2>
+            <div id="letterContent"></div>
+        </div>
+    </div>
+    <script>
+        const openBtn = document.getElementById('openLetterBtn');
+        const modal = document.getElementById('letterModal');
+        const closeBtn = document.getElementById('closeLetterBtn');
+        const submitBtn = document.getElementById('submitLetterBtn');
+        const textarea = document.getElementById('letterText');
+        const showBtn = document.getElementById('showLetterBtn');
+        const showModal = document.getElementById('showLetterModal');
+        const closeShowBtn = document.getElementById('closeShowLetterBtn');
+        const letterContent = document.getElementById('letterContent');
+        const openBtn2 = document.getElementById('openLetterBtn2');
+        const showBtn2 = document.getElementById('showLetterBtn2');
+        let currentSide = 'left';
+
+        openBtn.onclick = () => {
+            currentSide = 'left';
+            textarea.value = localStorage.getItem('myLetterLeft') || '';
+            modal.style.display = 'flex';
+        };
+        openBtn2.onclick = () => {
+            currentSide = 'right';
+            textarea.value = localStorage.getItem('myLetterRight') || '';
+            modal.style.display = 'flex';
+        };
+        closeBtn.onclick = () => { modal.style.display = 'none'; };
+        window.onclick = (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+            if (e.target === showModal) showModal.style.display = 'none';
+        };
+        submitBtn.onclick = () => {
+            if (currentSide === 'left') {
+                localStorage.setItem('myLetterLeft', textarea.value);
+            } else {
+                localStorage.setItem('myLetterRight', textarea.value);
+            }
+            alert('Your letter has been saved!');
+            modal.style.display = 'none';
+
+            // Only change positions on desktop, not on mobile
+            if (window.innerWidth > 600) {
+                document.querySelector('.button-group').style.right = '300px';
+                document.querySelector('.button-group.right').style.right = '850px';
+            } else {
+                // Reset any inline styles for mobile
+                document.querySelector('.button-group').style.right = '';
+                document.querySelector('.button-group.right').style.right = '';
+            }
+        };
+        function canShowLetter() {
+            const left = localStorage.getItem('myLetterLeft');
+            const right = localStorage.getItem('myLetterRight');
+            return left && left.trim() !== '' && right && right.trim() !== '';
+        }
+        showBtn.onclick = () => {
+            if (canShowLetter()) {
+                const saved = localStorage.getItem('myLetterLeft');
+                letterContent.textContent = saved ? saved : "No letter written yet.";
+                showModal.style.display = 'flex';
+            } else {
+                alert('Both letters must be filled before you can view them.');
+            }
+        };
+        showBtn2.onclick = () => {
+            if (canShowLetter()) {
+                const saved = localStorage.getItem('myLetterRight');
+                letterContent.textContent = saved ? saved : "No letter written yet.";
+                showModal.style.display = 'flex';
+            } else {
+                alert('Both letters must be filled before you can view them.');
+            }
+        };
+        closeShowBtn.onclick = () => { showModal.style.display = 'none'; };
+        window.onload = () => {
+            textarea.value = localStorage.getItem('myLetterLeft') || '';
+        };
+    </script>
+</body>
+</html>

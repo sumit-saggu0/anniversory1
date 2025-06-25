@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6 Month Anniversary Memories</title>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url('background.jpg') center center/cover no-repeat fixed, linear-gradient(135deg, #ffe0ec 0%, #b8c6db 100%);
+            font-family: 'Pacifico', cursive;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        h1 {
+            text-align: center;
+            color: #d72660;
+            margin-top: 40px;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px #fff;
+            animation: fadeInDown 1.2s;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px auto;
+            max-width: 1100px;
+        }
+        .memory {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(215,38,96,0.15);
+            overflow: hidden;
+            width: 260px;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: popIn 1s;
+        }
+        .memory:hover {
+            transform: scale(1.07) rotate(-2deg);
+            box-shadow: 0 16px 32px rgba(215,38,96,0.25);
+        }
+        .memory img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 3px solid #d72660;
+            animation: fadeIn 1.5s;
+        }
+        .memory img[src="img1.jpg"] {
+            object-fit: cover;
+            object-position: center top;
+        }
+        .memory img[src="img2.jpg"] {
+            object-fit: cover;
+            object-position: center medium;
+        }
+        .memory img[src="img3.png"] {
+            object-fit: cover;
+            object-position: center;
+        }
+        .caption {
+            padding: 18px;
+            text-align: center;
+            color: #5c5470;
+            font-size: 1.1em;
+            min-height: 60px;
+        }
+        a {
+            text-decoration: none;
+        }
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes fadeIn {
+            from { opacity: 0;}
+            to { opacity: 1;}
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.7);}
+            100% { transform: scale(1);}
+        }
+        /* Decorative hearts */
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #d72660;
+            left: 10px;
+            top: 10px;
+            transform: rotate(-20deg);
+            clip-path: polygon(50% 0%, 100% 35%, 82% 100%, 50% 80%, 18% 100%, 0% 35%);
+            animation: heartbeat 1.2s infinite;
+            opacity: 0.8;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1) rotate(-20deg);}
+            50% { transform: scale(1.2) rotate(-20deg);}
+        }
+        @media (max-width: 450px) {
+            h1 {
+                font-size: 1.3em;
+                margin-top: 18px;
+                padding: 0 8px;
+            }
+            .gallery {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+                margin: 16px auto;
+                max-width: 98vw;
+                display: flex; /* Ensure flex is set for mobile */
+            }
+            .memory {
+                width: 96vw;
+                min-width: 0;
+                max-width: 340px;
+            }
+            .memory img {
+                height: 350px;
+                width: 100%; /* Make images fill the card width */
+                object-fit: cover;
+                display: block;
+            }
+            .caption {
+                font-size: 0.98em;
+                padding: 10px;
+                min-height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Our 6 Month Anniversary Memories</h1>
+    <div class="gallery">
+        <div class="memory">
+            <a href="memory1.html">
+                <img src="img1.jpg" alt="Memory 1" id="memory1">
+                <div class="caption"> Hamari Pehli Mulaqat 💖</div>
+            </a>  
+        </div>
+        <div class="memory">
+            <a href="memory2.html">
+            <img src="img2.jpg" alt="Memory 2" id="memory2">
+            <div class="caption">Hmari Dosti Ki Suruwat 💝</div>
+            </a>
+        </div>
+        <div class="memory">
+            <a href="memory3.html">
+            <img src="img3.png" alt="Memory 3" id="memory3">
+            <div class="caption">Hmara Besti Ka Safar 🥰</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
